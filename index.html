@@ -1,137 +1,967 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Senne | CV</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="min-h-screen bg-slate-50 text-slate-800">
-  <main>
-    <div class="mx-auto max-w-6xl px-5 py-10 md:py-16">
-      <header class="mb-8 rounded-3xl bg-slate-950 p-8 text-white shadow-xl md:p-10">
-        <div class="flex flex-col justify-between gap-8 md:flex-row md:items-end">
-          <div>
-            <p class="mb-3 text-sm font-medium uppercase tracking-[0.25em] text-slate-300">Online CV</p>
-            <h1 class="text-4xl font-bold tracking-tight md:text-6xl">Senne</h1>
-            <p class="mt-4 text-xl text-slate-200 md:text-2xl">
-              Leadership Expert | Empowering Teams & Driving Success
-            </p>
-            <p class="mt-5 max-w-2xl text-base leading-7 text-slate-300">
-              Leadership expert focused on developing leaders, building high-performing teams, and driving organizational growth. Experienced in executive coaching, team dynamics, strategic planning, and creating strong organizational cultures through authentic leadership.
-            </p>
-          </div>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Senne — CV</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --lime: #c9f23e;
+    --coral: #ff5c3e;
+    --sky: #5ce1ff;
+    --violet: #8b5cf6;
+    --peach: #ffb347;
+    --mint: #3dffc0;
+    --bg: #0d0d0d;
+    --surface: #161616;
+    --surface2: #1f1f1f;
+    --border: rgba(255,255,255,0.08);
+    --text: #f5f5f0;
+    --muted: rgba(245,245,240,0.45);
+  }
 
-          <a href="#contact" class="inline-flex items-center justify-center rounded-2xl bg-white px-5 py-3 font-semibold text-slate-950 transition hover:bg-slate-200">
-            Contact Me
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* Custom cursor */
+  .cursor {
+    position: fixed;
+    top: 0; left: 0;
+    width: 12px; height: 12px;
+    background: var(--lime);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.15s ease, background 0.2s ease, width 0.2s ease, height 0.2s ease;
+    mix-blend-mode: difference;
+  }
+  .cursor.big {
+    width: 40px; height: 40px;
+    background: var(--lime);
+  }
+
+  /* Nav */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1.25rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(13,13,13,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 1rem;
+    font-weight: 900;
+    background: linear-gradient(90deg, var(--lime), var(--sky));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.02em;
+  }
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--lime); }
+
+  /* Hero */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8rem 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.18;
+    animation: drift 12s ease-in-out infinite alternate;
+  }
+  .blob-1 { width: 600px; height: 600px; background: var(--lime); top: -200px; right: -100px; animation-delay: 0s; }
+  .blob-2 { width: 400px; height: 400px; background: var(--coral); bottom: -150px; left: -100px; animation-delay: -4s; }
+  .blob-3 { width: 300px; height: 300px; background: var(--sky); top: 40%; left: 30%; animation-delay: -8s; }
+
+  @keyframes drift {
+    from { transform: translate(0, 0) scale(1); }
+    to { transform: translate(30px, 20px) scale(1.08); }
+  }
+
+  .hero-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(201,242,62,0.12);
+    border: 1px solid rgba(201,242,62,0.3);
+    color: var(--lime);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 100px;
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.2s ease forwards;
+  }
+  .tag-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--lime);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+  .hero-name {
+    font-family: 'Unbounded', sans-serif;
+    font-size: clamp(4rem, 12vw, 9rem);
+    font-weight: 900;
+    line-height: 0.92;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.35s ease forwards;
+  }
+  .hero-name .line-1 { display: block; color: var(--text); }
+  .hero-name .line-2 {
+    display: block;
+    background: linear-gradient(135deg, var(--lime) 0%, var(--sky) 50%, var(--coral) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    background-size: 200% auto;
+    animation: gradientShift 4s ease infinite, fadeUp 0.8s 0.35s ease forwards;
+    opacity: 0;
+  }
+  @keyframes gradientShift {
+    0% { background-position: 0% center; }
+    50% { background-position: 100% center; }
+    100% { background-position: 0% center; }
+  }
+
+  .hero-subtitle {
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    color: var(--muted);
+    max-width: 560px;
+    line-height: 1.65;
+    margin-bottom: 3rem;
+    font-weight: 300;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.5s ease forwards;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.65s ease forwards;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    border-radius: 100px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: none;
+  }
+  .btn:hover { transform: translateY(-3px); }
+  .btn-primary {
+    background: var(--lime);
+    color: #0d0d0d;
+    font-weight: 700;
+  }
+  .btn-primary:hover { box-shadow: 0 8px 30px rgba(201,242,62,0.4); }
+  .btn-secondary {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+  .btn-secondary:hover { border-color: rgba(255,255,255,0.3); box-shadow: 0 8px 30px rgba(0,0,0,0.3); }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: var(--muted);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0;
+    animation: fadeUp 1s 1.2s ease forwards;
+  }
+  .scroll-line {
+    width: 1px; height: 40px;
+    background: linear-gradient(to bottom, var(--lime), transparent);
+    animation: scrollBounce 2s ease-in-out infinite;
+  }
+  @keyframes scrollBounce {
+    0%,100% { transform: scaleY(1); opacity: 1; }
+    50% { transform: scaleY(0.6); opacity: 0.5; }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Stats bar */
+  .stats-bar {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 2rem;
+  }
+  .stats-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 0;
+  }
+  .stat-item {
+    padding: 1.5rem 2rem;
+    border-right: 1px solid var(--border);
+    text-align: center;
+  }
+  .stat-item:last-child { border-right: none; }
+  .stat-number {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+  .stat-label {
+    font-size: 0.78rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* Section shared */
+  section {
+    padding: 6rem 2rem;
+  }
+  .section-inner {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .section-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--lime);
+    margin-bottom: 1rem;
+  }
+  .section-title {
+    font-family: 'Unbounded', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin-bottom: 3rem;
+  }
+
+  /* Experience */
+  .experience-section {
+    background: var(--bg);
+  }
+  .exp-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    overflow: hidden;
+  }
+  .exp-card {
+    background: var(--surface);
+    padding: 2.5rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1rem;
+    cursor: none;
+    transition: background 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .exp-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--accent-color, var(--lime));
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .exp-card:hover { background: var(--surface2); }
+  .exp-card:hover::before { opacity: 1; }
+
+  .exp-role {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.35rem;
+    letter-spacing: -0.02em;
+  }
+  .exp-org {
+    font-size: 0.95rem;
+    color: var(--muted);
+    margin-bottom: 1rem;
+  }
+  .exp-meta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.2rem;
+  }
+  .exp-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 4px 12px;
+    border-radius: 100px;
+    letter-spacing: 0.04em;
+  }
+  .badge-present {
+    background: rgba(201,242,62,0.15);
+    color: var(--lime);
+    border: 1px solid rgba(201,242,62,0.25);
+  }
+  .badge-location {
+    background: rgba(255,255,255,0.06);
+    color: var(--muted);
+    border: 1px solid var(--border);
+  }
+  .exp-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .exp-bullets li {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.6;
+    padding-left: 1.2rem;
+    position: relative;
+  }
+  .exp-bullets li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent-color, var(--lime));
+    font-size: 0.75rem;
+    top: 3px;
+  }
+  .exp-number {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 4rem;
+    font-weight: 900;
+    color: var(--accent-color, var(--lime));
+    opacity: 0.15;
+    line-height: 1;
+  }
+
+  /* Projects */
+  .projects-section {
+    background: var(--surface);
+  }
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+  .project-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 2rem;
+    cursor: none;
+    transition: transform 0.25s, box-shadow 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .project-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  }
+  .project-color-bar {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+  .project-icon {
+    width: 52px; height: 52px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 1.25rem;
+  }
+  .project-title {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.02em;
+  }
+  .project-desc {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  /* Skills */
+  .skills-section {
+    background: var(--bg);
+  }
+  .skills-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  .skill-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 100px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    cursor: none;
+    transition: transform 0.2s, background 0.2s, border-color 0.2s, box-shadow 0.2s;
+  }
+  .skill-tag:hover {
+    transform: scale(1.06);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+  .skill-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* Contact */
+  .contact-section {
+    background: var(--surface);
+  }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+  .contact-cta {
+    font-size: clamp(1rem, 2vw, 1.15rem);
+    color: var(--muted);
+    line-height: 1.7;
+    font-weight: 300;
+    margin-bottom: 2rem;
+  }
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    text-decoration: none;
+    color: var(--text);
+    transition: transform 0.2s, border-color 0.2s, background 0.2s;
+    cursor: none;
+  }
+  .contact-link:hover {
+    transform: translateX(8px);
+    border-color: rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.05);
+  }
+  .contact-link-icon {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+  .contact-link-text {
+    flex: 1;
+  }
+  .contact-link-label {
+    font-size: 0.75rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 2px;
+  }
+  .contact-link-value {
+    font-size: 0.95rem;
+    font-weight: 500;
+  }
+  .contact-link-arrow {
+    color: var(--muted);
+    font-size: 1.2rem;
+    transition: transform 0.2s;
+  }
+  .contact-link:hover .contact-link-arrow {
+    transform: translateX(4px);
+    color: var(--lime);
+  }
+
+  .location-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 2rem;
+    height: 100%;
+  }
+  .location-map {
+    width: 100%;
+    height: 200px;
+    background: var(--bg);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 1.25rem;
+    position: relative;
+  }
+  .map-svg { width: 100%; height: 100%; }
+  .location-name {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.35rem;
+  }
+  .location-detail {
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  /* Footer */
+  footer {
+    padding: 2rem;
+    border-top: 1px solid var(--border);
+    text-align: center;
+  }
+  .footer-text {
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+  .footer-text span { color: var(--lime); }
+
+  /* Noise overlay */
+  .noise {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    pointer-events: none;
+    opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-size: 200px;
+  }
+
+  /* Mobile */
+  @media (max-width: 640px) {
+    .contact-grid { grid-template-columns: 1fr; }
+    .stat-item { border-right: none; border-bottom: 1px solid var(--border); }
+    .stat-item:last-child { border-bottom: none; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Noise grain -->
+<div class="noise"></div>
+
+<!-- Custom cursor -->
+<div class="cursor" id="cursor"></div>
+
+<!-- Nav -->
+<nav>
+  <div class="nav-logo">Senne</div>
+  <ul class="nav-links">
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="hero">
+  <div class="hero-bg">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+  <div class="hero-inner">
+    <div class="hero-tag">
+      <span class="tag-dot"></span>
+      Open to new opportunities
+    </div>
+    <h1 class="hero-name">
+      <span class="line-1">Hello,</span>
+      <span class="line-2">I'm Senne.</span>
+    </h1>
+    <p class="hero-subtitle">
+      Leadership expert focused on developing leaders, building high-performing teams, and driving organisational growth through authentic leadership.
+    </p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn btn-primary">Get in touch ↗</a>
+      <a href="#experience" class="btn btn-secondary">View my work</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    Scroll
+  </div>
+</section>
+
+<!-- Stats bar -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <div class="stat-number" style="color: var(--lime);">3</div>
+      <div class="stat-label">Active Roles</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number" style="color: var(--sky);">4</div>
+      <div class="stat-label">Total Roles</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number" style="color: var(--coral);">5+</div>
+      <div class="stat-label">Skills</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number" style="color: var(--peach);">∞</div>
+      <div class="stat-label">Ambition</div>
+    </div>
+  </div>
+</div>
+
+<!-- Experience -->
+<section class="experience-section" id="experience">
+  <div class="section-inner">
+    <div class="section-label">Work experience</div>
+    <h2 class="section-title">Where I've made<br>an impact.</h2>
+    <div class="exp-grid">
+
+      <div class="exp-card" style="--accent-color: var(--violet); opacity: 0.7;">
+        <div>
+          <div class="exp-role">Chair of Governors</div>
+          <div class="exp-org">Halesworth Primary School</div>
+          <div class="exp-meta">
+            <span class="exp-badge" style="background: rgba(255,255,255,0.06); color: var(--muted); border: 1px solid var(--border);">Past</span>
+            <span class="exp-badge badge-location">🇬🇧 United Kingdom</span>
+          </div>
+          <ul class="exp-bullets">
+            <li>Provided strategic leadership and governance oversight for the school.</li>
+            <li>Supported school leadership teams in driving educational excellence and student wellbeing.</li>
+            <li>Led governance discussions, policy review, and long-term development planning.</li>
+            <li>Promoted collaboration between staff, governors, parents, and the wider community.</li>
+          </ul>
+        </div>
+        <div class="exp-number" style="color: var(--violet);">01</div>
+      </div>
+
+      <div class="exp-card" style="--accent-color: var(--peach);">
+        <div>
+          <div class="exp-role">Customer Support Manager</div>
+          <div class="exp-org">Emerson Group</div>
+          <div class="exp-meta">
+            <span class="exp-badge badge-present"><span class="tag-dot"></span> Present</span>
+            <span class="exp-badge badge-location">🇳🇱 The Netherlands</span>
+          </div>
+          <ul class="exp-bullets">
+            <li>Managing customer support operations and ensuring a high-quality service experience.</li>
+            <li>Leading and developing the support team to meet and exceed customer expectations.</li>
+            <li>Establishing workflows, escalation processes, and quality standards.</li>
+          </ul>
+        </div>
+        <div class="exp-number" style="color: var(--peach);">02</div>
+      </div>
+
+      <div class="exp-card" style="--accent-color: var(--sky);">
+        <div>
+          <div class="exp-role">CEO</div>
+          <div class="exp-org">Aware</div>
+          <div class="exp-meta">
+            <span class="exp-badge badge-present"><span class="tag-dot"></span> Present</span>
+            <span class="exp-badge badge-location">🇳🇱 The Netherlands</span>
+          </div>
+          <ul class="exp-bullets">
+            <li>Leading the strategic vision and overall operations of Aware.</li>
+            <li>Driving organisational growth and mentoring high-performing teams.</li>
+            <li>Building a culture of innovation and long-term sustainable growth.</li>
+          </ul>
+        </div>
+        <div class="exp-number" style="color: var(--sky);">03</div>
+      </div>
+
+      <div class="exp-card" style="--accent-color: var(--coral);">
+        <div>
+          <div class="exp-role">Director of Social Media</div>
+          <div class="exp-org">Volt Radio</div>
+          <div class="exp-meta">
+            <span class="exp-badge badge-present"><span class="tag-dot"></span> Present</span>
+            <span class="exp-badge badge-location">🌐 Remote</span>
+          </div>
+          <ul class="exp-bullets">
+            <li>Leading social media strategy and branding initiatives.</li>
+            <li>Managing community engagement across multiple platforms.</li>
+            <li>Mentoring and coordinating department members.</li>
+          </ul>
+        </div>
+        <div class="exp-number" style="color: var(--coral);">04</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Projects -->
+<section class="projects-section" id="projects">
+  <div class="section-inner">
+    <div class="section-label">Selected projects</div>
+    <h2 class="section-title">Things I've<br>been building.</h2>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="project-color-bar" style="background: linear-gradient(90deg, var(--lime), var(--sky));"></div>
+        <div class="project-icon" style="background: rgba(201,242,62,0.15);">🚀</div>
+        <div class="project-title">Leadership Development</div>
+        <p class="project-desc">Focused on leadership growth, executive coaching, and empowering teams to reach their full potential through authentic, values-driven leadership.</p>
+      </div>
+
+      <div class="project-card">
+        <div class="project-color-bar" style="background: linear-gradient(90deg, var(--coral), var(--peach));"></div>
+        <div class="project-icon" style="background: rgba(255,92,62,0.15);">📱</div>
+        <div class="project-title">Social Media Strategy</div>
+        <p class="project-desc">Led social media operations and community engagement initiatives for Volt Radio while managing branding and content strategy across platforms.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Skills -->
+<section class="skills-section" id="skills">
+  <div class="section-inner">
+    <div class="section-label">Expertise</div>
+    <h2 class="section-title">What I bring<br>to the table.</h2>
+    <div class="skills-container" id="skills-container">
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section class="contact-section" id="contact">
+  <div class="section-inner">
+    <div class="section-label">Let's connect</div>
+    <h2 class="section-title">Say hello 👋</h2>
+    <div class="contact-grid">
+      <div>
+        <p class="contact-cta">
+          Whether you're looking for strategic leadership, executive coaching, or a fresh perspective on building remarkable teams — I'd love to hear from you.
+        </p>
+        <div class="contact-links">
+          <a href="mailto:me@sennetjeeh.lol" class="contact-link">
+            <div class="contact-link-icon" style="background: rgba(201,242,62,0.15);">✉️</div>
+            <div class="contact-link-text">
+              <span class="contact-link-label">Email</span>
+              <span class="contact-link-value">me@sennetjeeh.lol</span>
+            </div>
+            <span class="contact-link-arrow">→</span>
+          </a>
+          <a href="https://github.com/way2sennee" target="_blank" class="contact-link">
+            <div class="contact-link-icon" style="background: rgba(92,225,255,0.15);">🐙</div>
+            <div class="contact-link-text">
+              <span class="contact-link-label">GitHub</span>
+              <span class="contact-link-value">way2sennee</span>
+            </div>
+            <span class="contact-link-arrow">→</span>
           </a>
         </div>
-      </header>
-
-      <div class="grid gap-8 lg:grid-cols-[1fr_340px]">
-        <div class="space-y-8">
-          <section class="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
-            <h2 class="mb-5 text-xl font-semibold text-slate-950">Experience</h2>
-            <div class="space-y-7">
-              <article class="border-l-2 border-slate-200 pl-5">
-                <div class="flex flex-col justify-between gap-2 md:flex-row md:items-start">
-                  <div>
-                    <h3 class="text-lg font-semibold text-slate-950">Chair of Governors</h3>
-                    <p class="font-medium text-slate-700">Halesworth Primary School</p>
-                  </div>
-                  <div class="text-sm text-slate-500 md:text-right">
-                    <p>Present</p>
-                    <p>United Kingdom</p>
-                  </div>
-                </div>
-                <ul class="mt-4 list-disc space-y-2 pl-5 text-slate-700">
-                  <li>Providing strategic leadership and governance oversight for the school.</li>
-                  <li>Supporting school leadership teams in driving educational excellence and student wellbeing.</li>
-                  <li>Leading governance discussions, policy review, and long-term development planning.</li>
-                  <li>Promoting collaboration between staff, governors, parents, and the wider community.</li>
-                </ul>
-              </article>
-
-              <article class="border-l-2 border-slate-200 pl-5">
-                <div class="flex flex-col justify-between gap-2 md:flex-row md:items-start">
-                  <div>
-                    <h3 class="text-lg font-semibold text-slate-950">CEO</h3>
-                    <p class="font-medium text-slate-700">Aware</p>
-                  </div>
-                  <div class="text-sm text-slate-500 md:text-right">
-                    <p>Present</p>
-                    <p>The Netherlands</p>
-                  </div>
-                </div>
-                <ul class="mt-4 list-disc space-y-2 pl-5 text-slate-700">
-                  <li>Leading the strategic vision and overall operations of Aware.</li>
-                  <li>Driving organizational growth and mentoring high-performing teams.</li>
-                  <li>Building a culture of innovation and long-term sustainable growth.</li>
-                </ul>
-              </article>
-
-              <article class="border-l-2 border-slate-200 pl-5">
-                <div class="flex flex-col justify-between gap-2 md:flex-row md:items-start">
-                  <div>
-                    <h3 class="text-lg font-semibold text-slate-950">Department Director of Social Media</h3>
-                    <p class="font-medium text-slate-700">Volt Radio</p>
-                  </div>
-                  <div class="text-sm text-slate-500 md:text-right">
-                    <p>Present</p>
-                    <p>Remote</p>
-                  </div>
-                </div>
-                <ul class="mt-4 list-disc space-y-2 pl-5 text-slate-700">
-                  <li>Leading social media strategy and branding initiatives.</li>
-                  <li>Managing community engagement across multiple platforms.</li>
-                  <li>Mentoring and coordinating department members.</li>
-                </ul>
-              </article>
-            </div>
-          </section>
-
-          <section class="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
-            <h2 class="mb-5 text-xl font-semibold text-slate-950">Projects</h2>
-            <div class="grid gap-4 md:grid-cols-2">
-              <article class="rounded-2xl border border-slate-200 p-5">
-                <h3 class="font-semibold text-slate-950">Leadership Development</h3>
-                <p class="mt-3 text-sm leading-6 text-slate-700">
-                  Focused on leadership growth, executive coaching, and empowering teams to reach their full potential through authentic leadership.
-                </p>
-              </article>
-              <article class="rounded-2xl border border-slate-200 p-5">
-                <h3 class="font-semibold text-slate-950">Social Media Strategy</h3>
-                <p class="mt-3 text-sm leading-6 text-slate-700">
-                  Led social media operations and community engagement initiatives for Volt Radio while managing branding and content strategy.
-                </p>
-              </article>
-            </div>
-          </section>
+      </div>
+      <div class="location-card">
+        <div class="location-map">
+          <!-- Minimal Netherlands map SVG -->
+          <svg class="map-svg" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="300" fill="#0d0d0d"/>
+            <!-- Grid lines -->
+            <line x1="0" y1="150" x2="400" y2="150" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+            <line x1="200" y1="0" x2="200" y2="300" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+            <!-- Abstract NL silhouette shape -->
+            <path d="M 130 40 L 180 30 L 240 45 L 280 60 L 300 90 L 310 130 L 290 170 L 260 200 L 230 220 L 200 240 L 170 230 L 145 210 L 120 185 L 100 160 L 90 130 L 100 100 L 115 70 Z"
+              fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+            <!-- Leeuwarden dot -->
+            <circle cx="175" cy="80" r="4" fill="var(--lime)" opacity="0.9"/>
+            <circle cx="175" cy="80" r="12" fill="var(--lime)" opacity="0.15"/>
+            <circle cx="175" cy="80" r="20" fill="var(--lime)" opacity="0.05"/>
+            <!-- Pulse animation -->
+            <circle cx="175" cy="80" r="4" fill="var(--lime)">
+              <animate attributeName="r" values="4;18;4" dur="2.5s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" values="0.9;0;0.9" dur="2.5s" repeatCount="indefinite"/>
+            </circle>
+            <!-- Label -->
+            <text x="185" y="77" fill="var(--lime)" font-family="DM Sans, sans-serif" font-size="11" font-weight="500">Leeuwarden</text>
+            <text x="185" y="90" fill="rgba(255,255,255,0.4)" font-family="DM Sans, sans-serif" font-size="9">Friesland, NL</text>
+          </svg>
         </div>
-
-        <aside class="space-y-8">
-          <section id="contact" class="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
-            <h2 class="mb-5 text-xl font-semibold text-slate-950">Contact</h2>
-            <div class="space-y-4 text-sm">
-              <a class="block hover:text-slate-950" href="mailto:me@mail.sennetjeeh.lol">me@mail.sennetjeeh.lol</a>
-              <p>Leeuwarden, The Netherlands</p>
-              <a class="block hover:text-slate-950" href="https://github.com/way2sennee">GitHub</a>
-            </div>
-          </section>
-
-          <section class="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
-            <h2 class="mb-5 text-xl font-semibold text-slate-950">Skills</h2>
-            <div class="flex flex-wrap gap-2">
-              <span class="rounded-full bg-slate-100 px-3 py-2 text-sm font-medium text-slate-700">Leadership Development</span>
-              <span class="rounded-full bg-slate-100 px-3 py-2 text-sm font-medium text-slate-700">Team Management</span>
-              <span class="rounded-full bg-slate-100 px-3 py-2 text-sm font-medium text-slate-700">Executive Coaching</span>
-              <span class="rounded-full bg-slate-100 px-3 py-2 text-sm font-medium text-slate-700">Strategic Planning</span>
-              <span class="rounded-full bg-slate-100 px-3 py-2 text-sm font-medium text-slate-700">Social Media Strategy</span>
-            </div>
-          </section>
-        </aside>
+        <div class="location-name">Leeuwarden</div>
+        <div class="location-detail">Friesland, The Netherlands 🌷</div>
       </div>
     </div>
-  </main>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <p class="footer-text">© 2026 Senne — Made with <span>♥</span> in Leeuwarden</p>
+</footer>
+
+<script>
+// Cursor
+const cursor = document.getElementById('cursor');
+document.addEventListener('mousemove', e => {
+  cursor.style.left = e.clientX + 'px';
+  cursor.style.top = e.clientY + 'px';
+});
+document.querySelectorAll('a, button, .exp-card, .project-card, .skill-tag, .contact-link').forEach(el => {
+  el.addEventListener('mouseenter', () => cursor.classList.add('big'));
+  el.addEventListener('mouseleave', () => cursor.classList.remove('big'));
+});
+
+// Skills data
+const skills = [
+  { name: 'Customer Support', color: 'var(--peach)', dot: '#ffb347' },
+  { name: 'Leadership Development', color: 'var(--lime)', dot: '#c9f23e' },
+  { name: 'Team Management', color: 'var(--sky)', dot: '#5ce1ff' },
+  { name: 'Executive Coaching', color: 'var(--coral)', dot: '#ff5c3e' },
+  { name: 'Strategic Planning', color: 'var(--peach)', dot: '#ffb347' },
+  { name: 'Social Media Strategy', color: 'var(--mint)', dot: '#3dffc0' },
+  { name: 'Community Engagement', color: 'var(--violet)', dot: '#8b5cf6' },
+  { name: 'Governance & Policy', color: 'var(--lime)', dot: '#c9f23e' },
+  { name: 'Organisational Culture', color: 'var(--sky)', dot: '#5ce1ff' },
+  { name: 'Mentoring', color: 'var(--coral)', dot: '#ff5c3e' },
+  { name: 'Brand Strategy', color: 'var(--peach)', dot: '#ffb347' },
+];
+
+const container = document.getElementById('skills-container');
+skills.forEach((s, i) => {
+  const tag = document.createElement('div');
+  tag.className = 'skill-tag';
+  tag.style.animationDelay = `${i * 0.06}s`;
+  tag.innerHTML = `<span class="skill-dot" style="background:${s.dot};"></span>${s.name}`;
+  tag.addEventListener('mouseenter', () => {
+    tag.style.background = `rgba(${hexToRgb(s.dot)}, 0.12)`;
+    tag.style.borderColor = `rgba(${hexToRgb(s.dot)}, 0.4)`;
+    tag.style.color = s.color;
+    tag.style.boxShadow = `0 4px 20px rgba(${hexToRgb(s.dot)}, 0.2)`;
+  });
+  tag.addEventListener('mouseleave', () => {
+    tag.style.background = '';
+    tag.style.borderColor = '';
+    tag.style.color = '';
+    tag.style.boxShadow = '';
+  });
+  container.appendChild(tag);
+});
+
+function hexToRgb(hex) {
+  const r = parseInt(hex.slice(1,3),16);
+  const g = parseInt(hex.slice(3,5),16);
+  const b = parseInt(hex.slice(5,7),16);
+  return `${r},${g},${b}`;
+}
+
+// Scroll reveal
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.exp-card, .project-card, .contact-link').forEach((el, i) => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(24px)';
+  el.style.transition = `opacity 0.5s ${i * 0.08}s ease, transform 0.5s ${i * 0.08}s ease`;
+  observer.observe(el);
+});
+</script>
 </body>
 </html>
